@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<script src="Element.js"></script>
+		<script>
+		var sayHello = function() {alert('hello');}
+		
+		function Person() {
+		}
+		
+		function Bike() {
+		}
+		
+		var p1 = new Person()
+
+		var b1 = new Bike()
+		
+		alert(b1 instanceof Person)
+		alert(b1 instanceof Bike)
+		
+		</script>
+	</head>
+	<body>
+		<div id="baz"></div>
+		
+		<script type="text/javascript">
+			var baz = document.getElementById('baz')
+			var bar = Element.new({type:'input', id:'bar', name:'bar', value:'bar', parent:baz })
+			Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove()}, value: 'var', parent:baz })
+			
+			var tbl = Element.new({type:'table', parent:baz, border:"1"})
+			var tbody = Element.new({type:'tbody', parent:tbl})
+			var tr1 = Element.new({type:'tr', parent:tbody})
+			Element.new({type:'td', value:"hello", parent:tr1})
+			Element.new({type:'td', value:"world", parent:tr1.internal})
+		</script>
+		
+	</body>
+</html>
