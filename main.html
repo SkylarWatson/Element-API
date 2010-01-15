@@ -1,23 +1,6 @@
 <html>
 	<head>
 		<script src="Element.js"></script>
-		<script>
-		var sayHello = function() {alert('hello');}
-		
-		function Person() {
-		}
-		
-		function Bike() {
-		}
-		
-		var p1 = new Person()
-
-		var b1 = new Bike()
-		
-		alert(b1 instanceof Person)
-		alert(b1 instanceof Bike)
-		
-		</script>
 	</head>
 	<body>
 		<div id="baz"></div>
@@ -32,6 +15,9 @@
 			var tr1 = Element.new({type:'tr', parent:tbody})
 			Element.new({type:'td', value:"hello", parent:tr1})
 			Element.new({type:'td', value:"world", parent:tr1.internal})
+			var tr2 = Element.new({type:'tr', parent:tbody})
+			Element.new({type:'td', value:"yo", parent:tr2})
+			Element.new({type:'td', value:"dog", parent:tr2})
 		</script>
 		
 	</body>

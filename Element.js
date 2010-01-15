@@ -1,54 +1,35 @@
+var Element = { attributes:{}, internalUse:{} };
 
-var Element = {		
+Element.new = function(options) {
+	var type = options.type	
+	var tag = Element.internalUse.createType(options)
 	
-	new: function(options) {
-		var type = options.type	
-		var tag = Element.internalUse.createType(options)
-		delete options.type
-		
-		for(attribute in options) {
-			var lookup = this[attribute] 
-			if(lookup != null) {
-				lookup(type, options[attribute], tag);
-			} else {
-				this['default'](attribute, options[attribute], tag);
-			}
-		}
-		
-		return Element.internalUse.createResultWrapper(tag)
-	},
-	
-	parent: function(type, attribute, tag) {
-		Element.internalUse.parentExtractor(attribute).appendChild(tag);
-	},
-	
-	value: function(type, attribute, tag) {
-		if(type == 'button' || type == 'td' || type == 'span' || type == 'div') {
-			tag.innerHTML = attribute;
+	for(attribute in options) {
+		var lookup = Element.attributes[attribute] 
+		if(lookup != null) {
+			lookup(type, options[attribute], tag);
 		} else {
-			tag.value = attribute;
+			Element.internalUse.defaultProcessing(attribute, options[attribute], tag);
 		}
-	},
-		
-	default: function(name, attribute, tag) {
-		tag[name] = attribute
-	},
+	}
 	
-	internalUse: {}
-
+	return new ElementWrapper(tag);
+}
+	
+Element.attributes.parent = function(type, attribute, tag) {
+	Element.internalUse.parentExtractor(attribute).appendChild(tag);
+}
+	
+Element.attributes.value = function(type, attribute, tag) {
+	if(type == 'button' || type == 'td' || type == 'span' || type == 'div') {
+		tag.innerHTML = attribute;
+	} else {
+		tag.value = attribute;
+	}
 }
 
-Element.internalUse.createResultWrapper = function(tag) {
-	return {
-		_typeHack: "_fixMeWhenYouLearnJavascript",
-
-		internal: tag,
-
-		remove: function() {
-			var parent = this.internal.parentNode;
-			parent.removeChild(this.internal);
-		}			
-	}
+Element.internalUse.defaultProcessing = function(name, attribute, tag) {
+	tag[name] = attribute
 }
 
 Element.internalUse.createType = function(options) {
@@ -62,12 +43,21 @@ Element.internalUse.createType = function(options) {
 	} else {
 		element = document.createElement(options.type);
 	}
+	delete options.type
 	return element;
 }
 
 Element.internalUse.parentExtractor = function(target) {
-	if(target._typeHack == "_fixMeWhenYouLearnJavascript") {
-		return target.internal;
+	return (target instanceof ElementWrapper) ? target.internal : target;
+}
+
+function ElementWrapper(element) {
+	this.internal = element;
+
+	this.remove = function() {
+		var parent = element.parentNode;
+		if(parent != null) {
+			parent.removeChild(element);			
+		}
 	}
-	return target;
 }
