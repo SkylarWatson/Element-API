@@ -23,6 +23,13 @@ Element.attributes.parent = function(type, attribute, tag) {
 	Element.internalUse.extern(element).appendChild(tag);
 }
 
+Element.attributes.before = function(type, attribute, tag) {
+	var element = Element.internalUse.extern(attribute)
+	//var element = document.getElementById(attribute)
+	var parent = element.parentNode
+	Element.internalUse.extern(parent).insertBefore(tag, element);
+}
+
 Element.attributes.value = function(type, attribute, tag) {
 	if(Element.data.tagsUsingInnerHtml[type]) {
 		tag.innerHTML = attribute;

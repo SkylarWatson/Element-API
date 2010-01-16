@@ -12,7 +12,12 @@
 			
 			var bar = Element.new({type:'input', id:'bar', name:'bar', value:'bar', parent:'baz' })
 			// Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); Element.removeClassName(baz, 'red'); Element.addClassName(baz, 'blue');}, value: 'var', parent:baz })
-			Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); baz.removeClassName('red'); baz.addClassName('blue');}, value: 'var', parent:baz })
+			Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); baz.removeClassName('red'); 														baz.addClassName('blue');}, value: 'var', parent:baz })
+			
+//			var voo = Element.new({value:'hello', type:'input', parent:baz})
+//			var voo = Element.new({value:'hello', type:'input', parent:['parent','voo','before']})
+			var voo = Element.new({value:'hello', type:'input', before:'bar'})
+
 			
 			var tbl = Element.new({type:'table', parent:baz, border:"1"})
 			Element.new({id:'tbody', type:'tbody', parent:tbl})
