@@ -23,6 +23,11 @@ Element.attributes.parent = function(type, attribute, tag) {
 	Element.internalUse.extern(element).appendChild(tag);
 }
 
+Element.attributes.child = function(type, attribute, tag) {
+	var element = Element.for(attribute)
+	tag.appendChild(Element.internalUse.extern(element))
+}
+
 Element.attributes.before = function(type, attribute, tag) {
 	var element = Element.internalUse.extern(attribute)
 	var parent = element.parentNode

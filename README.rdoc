@@ -10,7 +10,7 @@ To use the Element API you will need to include the following Javascript file in
 
 == Example usages:
 
-This will create an HTML DIV element that contains the text "my div" and append it to the element baz.
+This will create an HTML DIV element that contains the text "my div" and append it to the element baz. 
 
 	Element.new({type:'div', value:"my div", parent:baz})	
 	
