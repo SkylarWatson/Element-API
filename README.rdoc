@@ -2,13 +2,38 @@
 
 API created to simplify the creation and manipulation of HTML elements in Javascript.
 
+== Setup:
+
+To use the Element API you will need to include the following Javascript file in your header. 
+	
+	<script src="Element.js"></script>
+
 == Example usages:
 
 This will create an HTML DIV element that contains the text "my div" and append it to the element baz.
 
-	Element.new({type:'div', value:"my div", parent:baz})			
+	Element.new({type:'div', value:"my div", parent:baz})	
+	
+Will create an HTML DIV element and will insert it before the baz element
+
+	Element.new({type:'div', value:"Will display before the baz element", before:baz})
+
+Will create an HTML DIV element and will insert it after the baz element
+
+	Element.new({type:'div', value:"Will display after the baz element", after:baz})
 
 Will create an HTML button that will alert "clicked" when the onclick event is fired.
 
 	Element.new({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })			
 
+Will add the class 'blue' to the element roo
+	
+	Element.addClassName(roo, 'blue')	
+or
+	roo.addClassName('blue')
+	
+Will remove the class 'blue' from the element roo
+
+	Element.removeClassName(roo, 'blue')
+or 
+	roo.removeClassName('blue')

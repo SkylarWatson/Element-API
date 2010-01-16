@@ -32,10 +32,11 @@ Element.attributes.before = function(type, attribute, tag) {
 Element.attributes.after = function(type, attribute, tag) {
 	var element = Element.internalUse.extern(attribute)
 	var parent = element.parentNode
-	var hasSibling = Element.internalUse.extern(parent).insertBefore(tag, element.nextSibling);
-	
-	if(!hasSibling) {
-		Element.attributes.parent(type, attribute, tag);
+	var hasSibling = element.nextSibling != null
+	if( hasSibling ) {
+		parent.insertBefore(tag, element.nextSibling);
+	} else {
+		Element.attributes.parent(type, parent, tag);
 	}
 }
 
@@ -96,7 +97,7 @@ Element.internalUse.addClassName = function (array, value) {
 }
 
 Element.internalUse.removeClassName = function(array, value) {
-	var index = array.indexOf(array, value);
+	var index = array.indexOf(value);
 	if(index != -1) {
 		array.splice(index, 1);
 	}
