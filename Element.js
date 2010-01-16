@@ -1,4 +1,6 @@
-var Element = { attributes:{}, internalUse:{} };
+var Element = { attributes:{}, internalUse:{}, data:{}, functions:{} };
+
+Element.data.tagsUsingInnerHtml = { button: true, td: true, span: true, div: true }
 
 Element.new = function(options) {
 	var type = options.type	
@@ -17,15 +19,72 @@ Element.new = function(options) {
 }
 	
 Element.attributes.parent = function(type, attribute, tag) {
-	Element.internalUse.parentExtractor(attribute).appendChild(tag);
+	var element = Element.for(attribute)
+	Element.internalUse.extern(element).appendChild(tag);
 }
-	
+
 Element.attributes.value = function(type, attribute, tag) {
-	if(type == 'button' || type == 'td' || type == 'span' || type == 'div') {
+	if(Element.data.tagsUsingInnerHtml[type]) {
 		tag.innerHTML = attribute;
 	} else {
 		tag.value = attribute;
 	}
+}
+
+Element.for = function(name) {
+	if(name instanceof ElementWrapper) return name;
+	
+	if(Element.isString(name)) {
+		var element = document.getElementById(name)
+		return element == null ? null : new ElementWrapper(element)		
+	}
+	
+	return new ElementWrapper(name)
+}
+
+Element.addClassName = function(element, className) {
+	element = Element.internalUse.extern(element)
+	var split = element.className.split(" ");
+	Element.internalUse.addClassName(split, className);
+	element.className = split.join(" ");
+}
+
+Element.removeClassName = function(element, className) {
+	element = Element.internalUse.extern(element)
+	var split = element.className.split(" ");
+	Element.internalUse.removeClassName(split, className);
+	element.className = split.join(" ");
+}
+
+Element.isString = function(value) {
+	return typeof value == "string" || value instanceof String;
+}
+
+Element.internalUse.extern = function(value) {
+	if(value instanceof ElementWrapper) return value.internal;
+	
+	if(Element.isString(value)) {
+		var element = document.getElementById(value)
+		return element == null ? null : element		
+	}
+	
+	return value
+}
+
+Element.internalUse.addClassName = function (array, value) {
+	var index = array.indexOf(array, value);
+	if(index == -1) {
+		array.push(value);
+	}
+	return array;
+}
+
+Element.internalUse.removeClassName = function(array, value) {
+	var index = array.indexOf(array, value);
+	if(index != -1) {
+		array.splice(index, 1);
+	}
+	return array;
 }
 
 Element.internalUse.defaultProcessing = function(name, attribute, tag) {
@@ -33,22 +92,27 @@ Element.internalUse.defaultProcessing = function(name, attribute, tag) {
 }
 
 Element.internalUse.createType = function(options) {
-	var element
+	var element;
+	var parent = Element.internalUse.extern(options.parent);
 	if(options.type == 'tr') {
-		element = Element.internalUse.parentExtractor(options.parent).insertRow(-1);
-		delete options.parent;
+		element = Element.internalUse.addRowToTable(parent, options);
 	} else if(options.type == 'td') {
-		element = Element.internalUse.parentExtractor(options.parent).insertCell(-1);
-		delete options.parent;
+		element = Element.internalUse.addCellToRow(parent, options);
 	} else {
 		element = document.createElement(options.type);
 	}
-	delete options.type
+	delete options.type;
 	return element;
 }
 
-Element.internalUse.parentExtractor = function(target) {
-	return (target instanceof ElementWrapper) ? target.internal : target;
+Element.internalUse.addRowToTable = function(parent, options) {
+	delete options.parent;
+	return parent.insertRow(-1);
+}
+
+Element.internalUse.addCellToRow = function(parent, options) {
+	delete options.parent;
+	return parent.insertCell(-1);
 }
 
 function ElementWrapper(element) {
@@ -59,5 +123,13 @@ function ElementWrapper(element) {
 		if(parent != null) {
 			parent.removeChild(element);			
 		}
+	}
+	
+	this.addClassName = function(name) {
+		Element.addClassName(this.internal, name);
+	}
+	
+	this.removeClassName = function(name) {
+		Element.removeClassName(this.internal, name);
 	}
 }

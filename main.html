@@ -1,23 +1,29 @@
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="main.css" />
 		<script src="Element.js"></script>
 	</head>
 	<body>
-		<div id="baz"></div>
+		<div id="baz" class="size red"></div>
 		
 		<script type="text/javascript">
-			var baz = document.getElementById('baz')
-			var bar = Element.new({type:'input', id:'bar', name:'bar', value:'bar', parent:baz })
-			Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove()}, value: 'var', parent:baz })
+			// var baz = document.getElementById('baz')
+			var baz = Element.for('baz')
+			
+			var bar = Element.new({type:'input', id:'bar', name:'bar', value:'bar', parent:'baz' })
+			// Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); Element.removeClassName(baz, 'red'); Element.addClassName(baz, 'blue');}, value: 'var', parent:baz })
+			Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); baz.removeClassName('red'); baz.addClassName('blue');}, value: 'var', parent:baz })
 			
 			var tbl = Element.new({type:'table', parent:baz, border:"1"})
-			var tbody = Element.new({type:'tbody', parent:tbl})
-			var tr1 = Element.new({type:'tr', parent:tbody})
+			Element.new({id:'tbody', type:'tbody', parent:tbl})
+			var tr1 = Element.new({type:'tr', parent:'tbody'})
 			Element.new({type:'td', value:"hello", parent:tr1})
-			Element.new({type:'td', value:"world", parent:tr1.internal})
-			var tr2 = Element.new({type:'tr', parent:tbody})
+			Element.new({type:'td', value:"world", parent:tr1})
+			var tr2 = Element.new({type:'tr', parent:'tbody'})
 			Element.new({type:'td', value:"yo", parent:tr2})
 			Element.new({type:'td', value:"dog", parent:tr2})
+			
+			Element.new({type:'div', value:"my div", parent:baz})			
 		</script>
 		
 	</body>
