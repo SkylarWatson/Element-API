@@ -25,9 +25,18 @@ Element.attributes.parent = function(type, attribute, tag) {
 
 Element.attributes.before = function(type, attribute, tag) {
 	var element = Element.internalUse.extern(attribute)
-	//var element = document.getElementById(attribute)
 	var parent = element.parentNode
 	Element.internalUse.extern(parent).insertBefore(tag, element);
+}
+
+Element.attributes.after = function(type, attribute, tag) {
+	var element = Element.internalUse.extern(attribute)
+	var parent = element.parentNode
+	var hasSibling = Element.internalUse.extern(parent).insertBefore(tag, element.nextSibling);
+	
+	if(!hasSibling) {
+		Element.attributes.parent(type, attribute, tag);
+	}
 }
 
 Element.attributes.value = function(type, attribute, tag) {

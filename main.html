@@ -11,12 +11,10 @@
 			var baz = Element.for('baz')
 			
 			var bar = Element.new({type:'input', id:'bar', name:'bar', value:'bar', parent:'baz' })
-			// Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); Element.removeClassName(baz, 'red'); Element.addClassName(baz, 'blue');}, value: 'var', parent:baz })
-			Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); baz.removeClassName('red'); 														baz.addClassName('blue');}, value: 'var', parent:baz })
+			Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); Element.removeClassName(baz, 'red'); Element.addClassName(baz, 'blue');}, value: 'var', parent:baz })
+//			Element.new({type:'button', id:'foo', name:'foo', onclick: function() {bar.remove(); baz.removeClassName('red'); baz.addClassName('blue');}, value: 'var', parent:baz })
 			
-//			var voo = Element.new({value:'hello', type:'input', parent:baz})
-//			var voo = Element.new({value:'hello', type:'input', parent:['parent','voo','before']})
-			var voo = Element.new({value:'hello', type:'input', before:'bar'})
+			var voo = Element.new({value:'yo puppy', type:'input', after:'bar'})
 
 			
 			var tbl = Element.new({type:'table', parent:baz, border:"1"})
@@ -28,7 +26,9 @@
 			Element.new({type:'td', value:"yo", parent:tr2})
 			Element.new({type:'td', value:"dog", parent:tr2})
 			
-			Element.new({type:'div', value:"my div", parent:baz})			
+						
+			Element.new({type:'div', value:"my div", parent:baz})
+			Element.new({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })			
 		</script>
 		
 	</body>
