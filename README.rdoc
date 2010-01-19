@@ -12,16 +12,21 @@ To use the Element API you will need to include the following Javascript file in
 
 You can use the code below to create an HTML DIV element that contains the text "my div" and will append it to the element baz. The Element.new method returns an ElementWrapper. The parent attribute can be passed in as an element, a String, or an ElementWrapper. To set the value within an object some objects use the value attribute and some use the innerHTML attribute. Using the Element API you are able to use the value attribute even if the elements DOM specifically calls for innerHTML.
 
-		Element.new({type:'div', value:"my div", parent:baz})
-	or
-		Element.new({type:'div', value:"my div 2", parent:'baz'})
-	or
-		var bar = Element.new({type:'span', parent:baz})
-		Element.new({type:'div', value:"my div 3", parent:bar})
+	Element.new({type:'div', value:"my div", parent:baz})
+or
+	Element.new({type:'div', value:"my div 2", parent:'baz'})
+or
+	var bar = Element.new({type:'span', parent:baz})
+	Element.new({type:'div', value:"my div 3", parent:bar})
 
-Will create an HTML DIV element and will insert it before the baz element
+The following code will create an HTML button element and will insert it before the element baz.
 
-	Element.new({type:'div', value:"Will display before the baz element", before:baz})
+	Element.new({type:'button', value:"Will display before the baz element", before:baz})
+or
+	Element.new({type:'button', value:"Will display before the baz element (2)", before:'baz'})
+or
+	var bar = Element.for('baz')
+	Element.new({type:'button', value:"Will display before the baz element (3)", before:bar})
 
 Will create an HTML DIV element and will insert it after the baz element
 
@@ -33,12 +38,12 @@ Will create an HTML button that will alert "clicked" when the onclick event is f
 
 Will add the class 'blue' to the element roo
 	
-		Element.addClassName(roo, 'blue')	
-	or
-		roo.addClassName('blue')
+	Element.addClassName(roo, 'blue')	
+or
+	roo.addClassName('blue')
 	
 Will remove the class 'blue' from the element roo
 
-		Element.removeClassName(roo, 'blue')
-	or 
-		roo.removeClassName('blue')
+	Element.removeClassName(roo, 'blue')
+or 
+	roo.removeClassName('blue')
