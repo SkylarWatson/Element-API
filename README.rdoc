@@ -37,13 +37,14 @@ or
 	var bar = Element.for('baz')
 	Element.new({type:'div', value:"Will display after the baz element", after:bar, className:"size"})
 
-CSS
+css
 
 	.size {
 		font-size:250%;
 	}
 	
-Will create an HTML button that will alert "clicked" when the onclick event is fired.
+	
+The code below will create an HTML button with the value "click me", append itself to the element baz, and when the onclick event is fired an alert will be displayed with the text "clicked" 
 
 	Element.new({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })			
 
