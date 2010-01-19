@@ -19,7 +19,7 @@ or
 	var bar = Element.new({type:'span', parent:baz})
 	Element.new({type:'div', value:"my div 3", parent:bar})
 
-The following code will create an HTML button element and will insert it before the element baz.
+The following code will create an HTML button element and will insert it before the element baz. Notice that in example three there's a call to the Element.for method which returns an  ElementWrapper for the given element.
 
 	Element.new({type:'button', value:"Will display before the baz element", before:baz})
 or
