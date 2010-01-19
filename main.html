@@ -42,7 +42,12 @@
 			
 			
 			
-			var roo = Element.new({type:'div', value:"Will display after the baz element", after:baz, className:"size"})
+			Element.new({type:'div', value:"Will display after the baz element", after:baz, className:"size"})
+			Element.new({type:'div', value:"Will display after the baz element", after:'baz', className:"size"})
+			
+			var bar = Element.for('baz')
+			Element.new({type:'div', value:"Will display after the baz element", after:bar, className:"size"})
+			
 			
 		
 			// Element.addClassName(roo, 'blue')
