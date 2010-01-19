@@ -28,6 +28,14 @@
 			
 						
 			Element.new({type:'div', value:"my div", parent:baz})
+			Element.new({type:'div', value:"my div 2", parent:'baz'})
+			
+			var bar = Element.new({type:'span', parent:baz})
+			Element.new({type:'div', value:"my div 3", parent:bar})
+			
+			
+			
+			
 			
 			Element.new({type:'div', value:"Will display before the baz element", before:baz})
 			var roo = Element.new({type:'div', value:"Will display after the baz element", after:baz, className:"size"})

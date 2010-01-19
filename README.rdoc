@@ -10,9 +10,14 @@ To use the Element API you will need to include the following Javascript file in
 
 == Example usages:
 
-The code below will create an HTML DIV element that contains the text "my div" and will append it to the element baz. The parent attribute can be passed in as an element, a String, or an ElementWrapper. To set the value within an object some objects use the value attribute and some use the innerHTML attribute. Using the Element API you are able to use the value attribute even if the elements DOM specifically calls for innerHTML.
+You can use the code below to create an HTML DIV element that contains the text "my div" and will append it to the element baz. The Element.new method returns an ElementWrapper. The parent attribute can be passed in as an element, a String, or an ElementWrapper. To set the value within an object some objects use the value attribute and some use the innerHTML attribute. Using the Element API you are able to use the value attribute even if the elements DOM specifically calls for innerHTML.
 
-	Element.new({type:'div', value:"my div", parent:baz})
+		Element.new({type:'div', value:"my div", parent:baz})
+	or
+		Element.new({type:'div', value:"my div 2", parent:'baz'})
+	or
+		var bar = Element.new({type:'span', parent:baz})
+		Element.new({type:'div', value:"my div 3", parent:bar})
 
 Will create an HTML DIV element and will insert it before the baz element
 
