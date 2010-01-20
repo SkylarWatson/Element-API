@@ -1,3 +1,9 @@
+/*
+	Copyright (c) 2004-2009, Skylar Watson.
+	Available via modified BSD license.
+*/
+
+
 var Element = { attributes:{}, internalUse:{}, data:{}, functions:{} };
 
 Element.data.tagsUsingInnerHtml = { button: true, td: true, span: true, div: true }
