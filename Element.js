@@ -30,8 +30,10 @@ Element.attributes.parent = function(type, attribute, tag) {
 }
 
 Element.attributes.child = function(type, attribute, tag) {
-	var element = Element.for(attribute)
-	tag.appendChild(Element.internalUse.extern(element))
+	for(var i = 0; i < attribute.length; ++i) {
+		var element = Element.for(attribute[i])
+		tag.appendChild(Element.internalUse.extern(element))
+	}
 }
 
 Element.attributes.before = function(type, attribute, tag) {

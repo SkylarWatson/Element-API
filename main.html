@@ -54,12 +54,14 @@
 			// roo.addClassName('blue')
 			// Element.removeClassName(roo, 'blue')
 			// roo.removeClassName('blue')
-			
-			var di = Element.new({type:'div', value:'div'})
-			Element.new({type:'span', value:'span', child:di, after:baz})
-			
 			Element.new({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })
 			
+			
+			var di = Element.new({type:'div', value:'Skylar div1'})
+			var di2 = Element.new({type:'div', value:'Skylar div2'})
+			
+			Element.new({type:'span', value:'span', child:[di,di2], after:baz})
+						
 /*			Element.new({type:'div', id:'div1', value:'div1', parent:baz})
 			Element.new({type:'div', id:'div2', value:'div2', parent:baz})
 			Element.new({type:'div', id:'div3', value:'div3', parent:baz})
