@@ -29,7 +29,7 @@ Element.attributes.parent = function(type, attribute, tag) {
 	Element.internalUse.extern(element).appendChild(tag);
 }
 
-Element.attributes.child = function(type, attribute, tag) {
+Element.attributes.children = function(type, attribute, tag) {
 	for(var i = 0; i < attribute.length; ++i) {
 		var element = Element.for(attribute[i])
 		tag.appendChild(Element.internalUse.extern(element))
