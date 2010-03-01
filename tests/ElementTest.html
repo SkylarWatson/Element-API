@@ -7,6 +7,43 @@
 	<div id="baz"></div>
   <script language="javascript">
 
+/* 
+* Test all elements by given attribute
+*/
+
+  	function testId() {
+		var div = Element.create({type:'div', id:'div', parent:baz}).internal
+		var span = Element.create({type:'span', id:'span', parent:baz}).internal
+		var button = Element.create({type:'button', id:'button', parent:baz}).internal
+		
+		assertEquals(div.id, 'div')
+		assertEquals(span.id, 'span')
+		assertEquals(button.id, 'button')
+	}
+
+/* 
+* Test each element attribute
+*/
+	
+	function testButtonId() {
+		var button = Element.create({type:'button', id:'button', parent:baz}).internal	
+		assertEquals(button.id, 'button')
+	}
+	
+	function testButtonValue() {
+		var button = Element.create({type:'button', value:'click me', parent:baz}).internal	
+		assertEquals(button.innerHTML, 'click me')
+	}
+	
+	function testButtonName() {
+		var button = Element.create({type:'button', name:'foo', parent:baz}).internal	
+		assertEquals(button.name, 'foo')
+	}
+
+/*
+* Test each element at once
+*/
+	
     function testCreateDiv() {
 		var element = Element.create({type:'div', id:'div1', name:'foo', value:'my div', parent:baz}).internal
 		var parent = Element.$('baz').internal;
