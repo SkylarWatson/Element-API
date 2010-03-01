@@ -7,46 +7,46 @@
 		<div id="baz" class="size red"></div>
 		
 		<script type="text/javascript">
-			// var baz = document.getElementById('baz')
-			var baz = Element.for('baz')
+			// var baz = document.getElementById('baz')			
+			var baz = Element.$('baz')
 			
-			var bar = Element.new({type:'input', id:'bar', name:'bar', value:'bar', parent:'baz' })
-			Element.new({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); Element.removeClassName(baz, 'red'); Element.addClassName(baz, 'blue');}, value: 'var', parent:baz })
-//			Element.new({type:'button', id:'foo', name:'foo', onclick: function() {bar.remove(); baz.removeClassName('red'); baz.addClassName('blue');}, value: 'var', parent:baz })
+			var bar = Element.create({type:'input', id:'bar', name:'bar', value:'bar', parent:'baz' })
+			Element.create({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); Element.removeClassName(baz, 'red'); Element.addClassName(baz, 'blue');}, value: 'var', parent:baz })
+//			Element.create({type:'button', id:'foo', name:'foo', onclick: function() {bar.remove(); baz.removeClassName('red'); baz.addClassName('blue');}, value: 'var', parent:baz })
 			
-			var voo = Element.new({value:'yo puppy', type:'input', after:'bar'})
+			var voo = Element.create({value:'yo puppy', type:'input', after:'bar'})
 
 			
-			var tbl = Element.new({type:'table', parent:baz, border:"1"})
-			Element.new({id:'tbody', type:'tbody', parent:tbl})
-			var tr1 = Element.new({type:'tr', parent:'tbody'})
-			Element.new({type:'td', value:"hello", parent:tr1})
-			Element.new({type:'td', value:"world", parent:tr1})
-			var tr2 = Element.new({type:'tr', parent:'tbody'})
-			Element.new({type:'td', value:"yo", parent:tr2})
-			Element.new({type:'td', value:"dog", parent:tr2})
+			var tbl = Element.create({type:'table', parent:baz, border:"1"})
+			Element.create({id:'tbody', type:'tbody', parent:tbl})
+			var tr1 = Element.create({type:'tr', parent:'tbody'})
+			Element.create({type:'td', value:"hello", parent:tr1})
+			Element.create({type:'td', value:"world", parent:tr1})
+			var tr2 = Element.create({type:'tr', parent:'tbody'})
+			Element.create({type:'td', value:"yo", parent:tr2})
+			Element.create({type:'td', value:"dog", parent:tr2})
 			
 						
-			Element.new({type:'div', value:"my div", parent:baz})
-			Element.new({type:'div', value:"my div 2", parent:'baz'})
+			Element.create({type:'div', value:"my div", parent:baz})
+			Element.create({type:'div', value:"my div 2", parent:'baz'})
 			
-//			var bar = Element.new({type:'span', parent:baz})
-//			Element.new({type:'div', value:"my div 3", parent:bar})
-			
-			
-			Element.new({type:'button', value:"Will display before the baz element", before:baz})
-			Element.new({type:'button', value:"Will display before the baz element (2)", before:'baz'})
-			
-			var bar = Element.for('baz')
-			Element.new({type:'button', value:"Will display before the baz element (3)", before:bar})
+//			var bar = Element.create({type:'span', parent:baz})
+//			Element.create({type:'div', value:"my div 3", parent:bar})
 			
 			
+			Element.create({type:'button', value:"Will display before the baz element", before:baz})
+			Element.create({type:'button', value:"Will display before the baz element (2)", before:'baz'})
 			
-			Element.new({type:'div', value:"Will display after the baz element", after:baz, className:"size"})
-			Element.new({type:'div', value:"Will display after the baz element", after:'baz', className:"size"})
+			var bar = Element.$('baz')
+			Element.create({type:'button', value:"Will display before the baz element (3)", before:bar})
 			
-			var bar = Element.for('baz')
-			Element.new({type:'div', value:"Will display after the baz element", after:bar, className:"size"})
+			
+			
+			Element.create({type:'div', value:"Will display after the baz element", after:baz, className:"size"})
+			Element.create({type:'div', value:"Will display after the baz element", after:'baz', className:"size"})
+			
+			var bar = Element.$('baz')
+			Element.create({type:'div', value:"Will display after the baz element", after:bar, className:"size"})
 			
 			
 		
@@ -55,20 +55,20 @@
 			// Element.removeClassName(roo, 'blue')
 			// roo.removeClassName('blue')
 			
-			Element.new({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })
+			Element.create({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })
 			
 			
-			var di = Element.new({type:'div', value:'Skylar div1'})
-			var di2 = Element.new({type:'div', value:'Skylar div2'})
+			var di = Element.create({type:'div', value:'Skylar div1'})
+			var di2 = Element.create({type:'div', value:'Skylar div2'})
 			
-			Element.new({type:'span', value:'span', children:[di,di2], after:baz})
-						
-/*			Element.new({type:'div', id:'div1', value:'div1', parent:baz})
-			Element.new({type:'div', id:'div2', value:'div2', parent:baz})
-			Element.new({type:'div', id:'div3', value:'div3', parent:baz})
-			Element.new({type:'div', id:'div1.5', value:'div1.5', after:'div1'})
-			Element.new({type:'div', id:'div2.5', value:'div2.5', before:'div3'})
-			Element.new({type:'div', id:'div4', value:'div4', after:'div3'}) 	*/
+			Element.create({type:'span', value:'span', children:[di,di2], after:baz})
+									
+/*			Element.create({type:'div', id:'div1', value:'div1', parent:baz})
+			Element.create({type:'div', id:'div2', value:'div2', parent:baz})
+			Element.create({type:'div', id:'div3', value:'div3', parent:baz})
+			Element.create({type:'div', id:'div1.5', value:'div1.5', after:'div1'})
+			Element.create({type:'div', id:'div2.5', value:'div2.5', before:'div3'})
+			Element.create({type:'div', id:'div4', value:'div4', after:'div3'}) 	*/
 			
 		</script>
 		

@@ -3,12 +3,12 @@
 	Available via modified BSD license.
 */
 
-
 var Element = { attributes:{}, internalUse:{}, data:{}, functions:{} };
+
 
 Element.data.tagsUsingInnerHtml = { button: true, td: true, span: true, div: true }
 
-Element.new = function(options) {
+Element.create = function(options) {
 	var type = options.type	
 	var tag = Element.internalUse.createType(options)
 	
@@ -19,28 +19,31 @@ Element.new = function(options) {
 		} else {
 			Element.internalUse.defaultProcessing(attribute, options[attribute], tag);
 		}
-	}
-	
-	return new ElementWrapper(tag);
+	}	
+	return new ElementWrapper(tag);	
 }
-	
+
+
 Element.attributes.parent = function(type, attribute, tag) {
-	var element = Element.for(attribute)
-	Element.internalUse.extern(element).appendChild(tag);
+	var element = Element.$(attribute)
+	Element.internalUse.extern(element).appendChild(tag); 
 }
+
 
 Element.attributes.children = function(type, attribute, tag) {
 	for(var i = 0; i < attribute.length; ++i) {
-		var element = Element.for(attribute[i])
+		var element = Element.$(attribute[i])
 		tag.appendChild(Element.internalUse.extern(element))
 	}
 }
+
 
 Element.attributes.before = function(type, attribute, tag) {
 	var element = Element.internalUse.extern(attribute)
 	var parent = element.parentNode
 	Element.internalUse.extern(parent).insertBefore(tag, element);
 }
+
 
 Element.attributes.after = function(type, attribute, tag) {
 	var element = Element.internalUse.extern(attribute)
@@ -53,6 +56,7 @@ Element.attributes.after = function(type, attribute, tag) {
 	}
 }
 
+
 Element.attributes.value = function(type, attribute, tag) {
 	if(Element.data.tagsUsingInnerHtml[type]) {
 		tag.innerHTML = attribute;
@@ -61,7 +65,8 @@ Element.attributes.value = function(type, attribute, tag) {
 	}
 }
 
-Element.for = function(name) {
+
+Element.$ = function(name) {
 	if(name instanceof ElementWrapper) return name;
 	
 	if(Element.isString(name)) {
@@ -71,6 +76,7 @@ Element.for = function(name) {
 	
 	return new ElementWrapper(name)
 }
+
 
 Element.addClassName = function(element, className) {
 	element = Element.internalUse.extern(element)
@@ -86,9 +92,11 @@ Element.removeClassName = function(element, className) {
 	element.className = split.join(" ");
 }
 
+
 Element.isString = function(value) {
 	return typeof value == "string" || value instanceof String;
 }
+
 
 Element.internalUse.extern = function(value) {
 	if(value instanceof ElementWrapper) return value.internal;
@@ -109,6 +117,7 @@ Element.internalUse.addClassName = function (array, value) {
 	return array;
 }
 
+
 Element.internalUse.removeClassName = function(array, value) {
 	var index = array.indexOf(value);
 	if(index != -1) {
@@ -117,9 +126,11 @@ Element.internalUse.removeClassName = function(array, value) {
 	return array;
 }
 
+
 Element.internalUse.defaultProcessing = function(name, attribute, tag) {
 	tag[name] = attribute
 }
+
 
 Element.internalUse.createType = function(options) {
 	var element;
@@ -135,15 +146,18 @@ Element.internalUse.createType = function(options) {
 	return element;
 }
 
+
 Element.internalUse.addRowToTable = function(parent, options) {
 	delete options.parent;
 	return parent.insertRow(-1);
 }
 
+
 Element.internalUse.addCellToRow = function(parent, options) {
 	delete options.parent;
 	return parent.insertCell(-1);
 }
+
 
 function ElementWrapper(element) {
 	this.internal = element;
