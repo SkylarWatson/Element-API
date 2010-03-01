@@ -6,11 +6,41 @@
  <body>
 	<div id="baz"></div>
   <script language="javascript">
-	 Element.new({type:'div', value:"my div", parent:baz})
-    function testElementnew() {
-		assertEquals(1, 1)
+
+    function testCreateDiv() {
+		var element = Element.create({type:'div', id:'div1', name:'foo', value:'my div', parent:baz}).internal
+		var parent = Element.$('baz').internal;
+					
+		assertEquals('Test element is a span', 'DIV', element.nodeName)
+		assertEquals('Test element value', 'my div', element.innerHTML)
+		assertEquals('Test element id', 'div1', element.id)
+		assertEquals('Test element name', 'foo', element.name)
+//		assertEquals('Test element is a child of parent', 'div1', parent.childNodes[0].id)
     }
+
+    function testCreateSpan() {
+		var element = Element.create({type:'span', id:'span1', name:'bar', value:'my span', parent:baz}).internal
+		var parent = Element.$('baz').internal;
+					
+		assertEquals('Test element is a span', 'SPAN', element.nodeName)
+		assertEquals('Test element value', 'my span', element.innerHTML)
+		assertEquals('Test element id', 'span1', element.id)
+		assertEquals('Test element name', 'bar', element.name)
+    }
+
+    function testCreateButton() {
+		var element = Element.create({type:'button', id:'button1', name:'pinky', value:'my button', parent:baz}).internal
+		var parent = Element.$('baz').internal;
+					
+		assertEquals('Test element is a button', 'BUTTON', element.nodeName)
+		assertEquals('Test element value', 'my button', element.innerHTML)
+		assertEquals('Test element id', 'button1', element.id)
+		assertEquals('Test element name', 'pinky', element.name)
+    }
+
+
   </script>
+
  </body>
 </html>
 
