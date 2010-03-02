@@ -7,42 +7,117 @@
 	<div id="baz"></div>
   <script language="javascript">
 
-/* 
-* Test all elements by given attribute
-*/
 
-  	function testId() {
-		var div = Element.create({type:'div', id:'div', parent:baz}).internal
-		var span = Element.create({type:'span', id:'span', parent:baz}).internal
-		var button = Element.create({type:'button', id:'button', parent:baz}).internal
+	function test_value_is_instance_of_String() {
+		assertTrue(Element.isString('foo'))
+	}
+	
+	function test_value_is_not_instance_of_String() {
+		assertFalse(Element.isString(1))
+	}
+
+	function test_object_is_instance_of_ElementWrapper() {
+		var elementWrapper = Element.create({type:'div', id:'id', parent:baz})	
 		
-		assertEquals(div.id, 'div')
-		assertEquals(span.id, 'span')
-		assertEquals(button.id, 'button')
+		assertTrue(Element.$('id') instanceof ElementWrapper)
+		assertTrue(Element.$(elementWrapper.internal) instanceof ElementWrapper)
+		assertTrue(Element.$(elementWrapper) instanceof ElementWrapper)
+	}
+	
+	function test_object_is_not_instance_of_ElementWrapper() {
+		assertFalse(new Object() instanceof ElementWrapper)
+	}
+	
+	function test_extern_returns_instance_of_element() {
+		var elementWrapper = Element.$('baz')
+		
+		assertTrue(Element.internalUse.extern(elementWrapper) instanceof HTMLDivElement)
+		assertTrue(Element.internalUse.extern('baz') instanceof HTMLDivElement)
+	}
+	
+	function test_extern_does_not_return_instance_of_element() {
+		assertFalse(Element.internalUse.extern(new Object()) instanceof HTMLDivElement)
 	}
 
-/* 
-* Test each element attribute
-*/
-	
-	function testButtonId() {
-		var button = Element.create({type:'button', id:'button', parent:baz}).internal	
-		assertEquals(button.id, 'button')
+	function test_button_attribute_type() {
+		var element = Element.create({type:'button', id:'button', parent:baz}).internal	
+		assertEquals('BUTTON', element.nodeName)
 	}
 	
-	function testButtonValue() {
-		var button = Element.create({type:'button', value:'click me', parent:baz}).internal	
-		assertEquals(button.innerHTML, 'click me')
+	function test_button_attribute_innerHTML() {
+		var element = Element.create({type:'button', innerHTML:'click me', parent:baz}).internal	
+		assertEquals(element.innerHTML, 'click me')
 	}
 	
-	function testButtonName() {
-		var button = Element.create({type:'button', name:'foo', parent:baz}).internal	
-		assertEquals(button.name, 'foo')
+	function test_button_attribute_id() {
+		var element = Element.create({type:'button', id:'button', parent:baz}).internal	
+		assertEquals(element.id, 'button')
+	}                  
+	                   
+	function test_button_attribute_value() {
+		var element = Element.create({type:'button', value:'click me', parent:baz}).internal	
+		assertEquals(element.innerHTML, 'click me')
+	}                  
+	                   
+	function test_button_attribute_name() {
+		var element = Element.create({type:'button', name:'foo', parent:baz}).internal	
+		assertEquals(element.name, 'foo')
 	}
+
+	function test_span_attribute_type() {
+		var element = Element.create({type:'span', id:'button', parent:baz}).internal	
+		assertEquals('SPAN', element.nodeName)
+	}
+	
+	function test_span_attribute_id() {
+		var element = Element.create({type:'span', id:'span', parent:baz}).internal	
+		assertEquals(element.id, 'span')
+	}
+	
+	function test_span_attribute_value() {
+		var element = Element.create({type:'span', value:'my span', parent:baz}).internal	
+		assertEquals(element.innerHTML, 'my span')
+	}
+	
+	function test_span_attribute_name() {
+		var element = Element.create({type:'span', name:'foo', parent:baz}).internal	
+		assertEquals(element.name, 'foo')
+	}
+	
+	function test_div_attribute_type() {
+		var element = Element.create({type:'div', id:'button', parent:baz}).internal	
+		assertEquals('DIV', element.nodeName)
+	}
+	
+	function test_div_attribute_id() {
+		var element = Element.create({type:'div', id:'div', parent:baz}).internal	
+		assertEquals(element.id, 'div')
+	}
+	
+	function test_div_attribute_value() {
+		var element = Element.create({type:'div', value:'my div', parent:baz}).internal	
+		assertEquals(element.innerHTML, 'my div')
+	}
+	
+	function test_span_attribute_name() {
+		var element = Element.create({type:'div', name:'foo', parent:baz}).internal	
+		assertEquals(element.name, 'foo')
+	}
+
 
 /*
 * Test each element at once
 */
+
+	function testId() {
+		var div = Element.create({type:'div', id:'div', parent:baz}).internal
+		var span = Element.create({type:'span', id:'span', parent:baz}).internal
+		var button = Element.create({type:'button', id:'button', parent:baz}).internal
+	
+		assertEquals(div.id, 'div')
+		assertEquals(span.id, 'span')
+		assertEquals(button.id, 'button')
+	}
 	
     function testCreateDiv() {
 		var element = Element.create({type:'div', id:'div1', name:'foo', value:'my div', parent:baz}).internal
