@@ -49,11 +49,14 @@
 			Element.create({type:'div', value:"Will display after the baz element", after:bar, className:"size"})
 			
 			
-		
-			// Element.addClassName(roo, 'blue')
-			// roo.addClassName('blue')
-			// Element.removeClassName(roo, 'blue')
-			// roo.removeClassName('blue')
+			var roo = Element.create({type:'div', value:"I'm roo", after:bar, className:"size"})
+			
+			Element.addClassName(roo, 'blue')
+			Element.replaceClassName(roo, 'blue','red')
+			
+			//roo.addClassName('blue')
+			//Element.removeClassName(roo, 'blue')
+			//roo.removeClassName('blue')
 			
 			Element.create({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })
 			

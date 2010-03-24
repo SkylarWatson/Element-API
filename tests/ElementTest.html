@@ -2,6 +2,7 @@
  <head>
   <script language="javascript" src="jsUnitCore.js"></script>
   <script language="javascript" src="../Element.js"></script>
+  <link rel="stylesheet" type="text/css" href="main.css" />
  </head>
  <body>
 	<div id="baz"></div>
@@ -37,6 +38,12 @@
 	
 	function test_extern_does_not_return_instance_of_element() {
 		assertFalse(Element.internalUse.extern(new Object()) instanceof HTMLDivElement)
+	}
+
+	function test_element_will_add_class() {
+		var element = Element.$('baz').internal
+		Element.addClassName(element, 'blue')	
+		assertEquals(' blue', element.className)	
 	}
 
 	function test_button_attribute_type() {

@@ -23,12 +23,10 @@ Element.create = function(options) {
 	return new ElementWrapper(tag);	
 }
 
-
 Element.attributes.parent = function(type, attribute, tag) {
 	var element = Element.$(attribute)
 	Element.internalUse.extern(element).appendChild(tag); 
 }
-
 
 Element.attributes.children = function(type, attribute, tag) {
 	for(var i = 0; i < attribute.length; ++i) {
@@ -37,13 +35,11 @@ Element.attributes.children = function(type, attribute, tag) {
 	}
 }
 
-
 Element.attributes.before = function(type, attribute, tag) {
 	var element = Element.internalUse.extern(attribute)
 	var parent = element.parentNode
 	Element.internalUse.extern(parent).insertBefore(tag, element);
 }
-
 
 Element.attributes.after = function(type, attribute, tag) {
 	var element = Element.internalUse.extern(attribute)
@@ -56,7 +52,6 @@ Element.attributes.after = function(type, attribute, tag) {
 	}
 }
 
-
 Element.attributes.value = function(type, attribute, tag) {
 	if(Element.data.tagsUsingInnerHtml[type]) {
 		tag.innerHTML = attribute;
@@ -64,7 +59,6 @@ Element.attributes.value = function(type, attribute, tag) {
 		tag.value = attribute;
 	}
 }
-
 
 Element.$ = function(name) {
 	if(name instanceof ElementWrapper) return name;
@@ -76,7 +70,6 @@ Element.$ = function(name) {
 	
 	return new ElementWrapper(name)
 }
-
 
 Element.addClassName = function(element, className) {
 	element = Element.internalUse.extern(element)
@@ -92,11 +85,14 @@ Element.removeClassName = function(element, className) {
 	element.className = split.join(" ");
 }
 
+Element.replaceClassName = function(element, oldClassName, newClassName) {
+	Element.removeClassName(element,oldClassName)
+	Element.addClassName(element,newClassName)
+}
 
 Element.isString = function(value) {
 	return typeof value == "string" || value instanceof String;
 }
-
 
 Element.internalUse.extern = function(value) {
 	if(value instanceof ElementWrapper) return value.internal;
@@ -117,7 +113,6 @@ Element.internalUse.addClassName = function (array, value) {
 	return array;
 }
 
-
 Element.internalUse.removeClassName = function(array, value) {
 	var index = array.indexOf(value);
 	if(index != -1) {
@@ -126,11 +121,9 @@ Element.internalUse.removeClassName = function(array, value) {
 	return array;
 }
 
-
 Element.internalUse.defaultProcessing = function(name, attribute, tag) {
 	tag[name] = attribute
 }
-
 
 Element.internalUse.createType = function(options) {
 	var element;
@@ -146,7 +139,6 @@ Element.internalUse.createType = function(options) {
 	return element;
 }
 
-
 Element.internalUse.addRowToTable = function(parent, options) {
 	delete options.parent;
 	return parent.insertRow(-1);
@@ -157,7 +149,6 @@ Element.internalUse.addCellToRow = function(parent, options) {
 	delete options.parent;
 	return parent.insertCell(-1);
 }
-
 
 function ElementWrapper(element) {
 	this.internal = element;
