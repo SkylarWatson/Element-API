@@ -3,10 +3,11 @@
 	Available via modified BSD license.
 */
 
-var Element = { attributes:{}, internalUse:{}, data:{}, functions:{} };
+var Element = { attributes:{}, internalUse:{}, data:{}, functions:{}};
 
 
 Element.data.tagsUsingInnerHtml = { button: true, td: true, span: true, div: true }
+Element.exclusiveClassList = {}
 
 Element.create = function(options) {
 	var type = options.type	
@@ -74,8 +75,16 @@ Element.$ = function(name) {
 Element.addClassName = function(element, className) {
 	element = Element.internalUse.extern(element)
 	var split = element.className.split(" ");
-	Element.internalUse.addClassName(split, className);
-	element.className = split.join(" ");
+
+	for(index in Element.exclusiveClassList.element) {
+		var exclusiveClass = Element.exclusiveClassList.element[index]
+		if(exclusiveClass == className) {
+			Element.internalUse.addClassName(split, className);
+			element.className = split.join(" ");
+		} else {
+			Element.removeClassName(element,exclusiveClass)
+		}
+	}	
 }
 
 Element.removeClassName = function(element, className) {
@@ -88,6 +97,10 @@ Element.removeClassName = function(element, className) {
 Element.replaceClassName = function(element, oldClassName, newClassName) {
 	Element.removeClassName(element,oldClassName)
 	Element.addClassName(element,newClassName)
+}
+
+Element.setExclusiveClassNames = function(element, values) {
+	Element.exclusiveClassList.element = values
 }
 
 Element.isString = function(value) {
@@ -119,6 +132,12 @@ Element.internalUse.removeClassName = function(array, value) {
 		array.splice(index, 1);
 	}
 	return array;
+}
+
+Element.internalUse.setExclusiveClassNames = function() {
+	for(var x in array) {
+		
+	}
 }
 
 Element.internalUse.defaultProcessing = function(name, attribute, tag) {
@@ -166,5 +185,9 @@ function ElementWrapper(element) {
 	
 	this.removeClassName = function(name) {
 		Element.removeClassName(this.internal, name);
+	}
+	
+	this.setExclusiveClassNames = function(values) {
+		Element.setExclusiveClassNames(this,values)		
 	}
 }

@@ -4,9 +4,11 @@
 		<script src="Element.js"></script>
 	</head>
 	<body>
-		<div id="baz" class="size red"></div>
+		<div id="baz" class="size red"></div>	
 		
 		<script type="text/javascript">
+		
+			
 			var baz = document.getElementById('baz')	
 			var baz = Element.$('baz')
 			
@@ -51,8 +53,12 @@
 			
 			var roo = Element.create({type:'div', value:"I'm roo", after:bar, className:"size"})
 			
+			Element.$(roo).setExclusiveClassNames(['red','blue'])
+			
 			Element.addClassName(roo, 'blue')
+			Element.addClassName(roo,'red')
 			Element.replaceClassName(roo, 'blue','red')
+			Element.addClassName(roo,'blue')
 			
 			//roo.addClassName('blue')
 			//Element.removeClassName(roo, 'blue')
