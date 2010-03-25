@@ -77,35 +77,13 @@ Element.addClassName = function(element, className) {
 	var split = element.className.split(" ");
 
 	if(Element.internalUse.isExclusive(element,className)) {
-		//Element.exclusiveClassList.element = className
 		Element.internalUse.removeExclusive(className, element.className, element)
 		Element.internalUse.addClassName(split, className);
 		element.className = split.join(" ");
-		
-		//alert(className + " : " + element.className)
-				
-		// Remove others from list
-		// Add to list
 	} else {
-		// Just add to list
-	}
-/*
-	for(index in Element.exclusiveClassList.element) {
-		elementContainsClass = false
-		var exclusiveClass = Element.exclusiveClassList.element[index]
-		
-		if(exclusiveClass == className) {
-			containsClass = true
-		}
-		
-		if(elementContainsClass) {
-			Element.internalUse.addClassName(split, className);
-			element.className = split.join(" ");
-		} else {
-			Element.removeClassName(element,exclusiveClass)
-		}
-	}
-*/	
+		Element.internalUse.addClassName(split, className);
+		element.className = split.join(" ");
+	}	
 }
 
 Element.removeClassName = function(element, className) {
