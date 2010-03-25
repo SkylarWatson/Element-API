@@ -76,15 +76,36 @@ Element.addClassName = function(element, className) {
 	element = Element.internalUse.extern(element)
 	var split = element.className.split(" ");
 
+	if(Element.internalUse.isExclusive(element,className)) {
+		//Element.exclusiveClassList.element = className
+		Element.internalUse.removeExclusive(className, element.className, element)
+		Element.internalUse.addClassName(split, className);
+		element.className = split.join(" ");
+		
+		//alert(className + " : " + element.className)
+				
+		// Remove others from list
+		// Add to list
+	} else {
+		// Just add to list
+	}
+/*
 	for(index in Element.exclusiveClassList.element) {
+		elementContainsClass = false
 		var exclusiveClass = Element.exclusiveClassList.element[index]
+		
 		if(exclusiveClass == className) {
+			containsClass = true
+		}
+		
+		if(elementContainsClass) {
 			Element.internalUse.addClassName(split, className);
 			element.className = split.join(" ");
 		} else {
 			Element.removeClassName(element,exclusiveClass)
 		}
-	}	
+	}
+*/	
 }
 
 Element.removeClassName = function(element, className) {
@@ -105,6 +126,27 @@ Element.setExclusiveClassNames = function(element, values) {
 
 Element.isString = function(value) {
 	return typeof value == "string" || value instanceof String;
+}
+
+Element.internalUse.removeExclusive = function(className, object, element) {
+	var split = object.split(" ")
+	for(var item in split) {
+		if(Element.internalUse.isExclusive(element,className)) {
+			Element.removeClassName(element, split[item])
+		}
+	}	
+}
+
+Element.internalUse.isExclusive = function(element, className) {	
+	var exclusiveMap = Element.exclusiveClassList
+	
+	for(var listOfItemsInMap in exclusiveMap) {
+		for(var itemInList in exclusiveMap[listOfItemsInMap]) {
+			if(exclusiveMap[listOfItemsInMap][itemInList] === className)
+				return true
+			}
+	} 
+  	return false;
 }
 
 Element.internalUse.extern = function(value) {
