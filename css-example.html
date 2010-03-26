@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>CIS240 CSS</title>
+		<script type="text/javascript" src="Element.js"></script>
+		
+		<style type="text/css">
+				.red {color: #FF0000}
+				.black {color: #000;}
+				.center {text-align: center;}
+				.left {text-align: left;}
+				.right {text-align: right;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="baseDiv">foo</div>
+		
+		<h1>CIS240 E-Commerce Website II (DHTML)</h1>
+		<h3 id='heading'>Assignment #1</h3>
+		<p>Please modify this page to create the following DHMTL effects. </p>
+		<p onClick="Element.addClassName(this,'red')">1. Click this paragraph to change the font color to red. </p>		
+		<p class="red" onMouseOver="Element.addClassName(this,'black')">2. Mouseover this paragraph to change the font color to black.</p>
+		<p onMouseOver="Element.$('heading').addClassName('center')">3. Mousever of this paragraph to center the H3 element containing Assignment #1.</p>
+		<p>4. Click the button to left align the H3 element. </p>
+		<p>
+		  <label>
+		  <input type="submit" onClick="Element.$('heading').addClassName('left')" value="Submit" />
+		  </label>
+		</p>
+		<p onMouseOver="Element.addClassName(this,'red')" onClick="Element.replaceClassName(this,'red','black')">
+		   5. Part 1. Mouseover this paragraph to change the font to a font of you choice. 
+			  Part 2. Click on this paragraph to return the font to the default font.
+		</p>
+		<p>6. Click on the button to make the word SALE font size 24. </p>
+		<p>
+		  <label>
+		  <input type="submit" name="button2" id="button2" value="Submit" />
+		  </label>
+		  <label>
+		  <input type="submit" name="button3" id="button3" value="Submit" />
+		  </label>
+		</p>
+		<p>7. Click on the second button above to return the word to its original size.</p>
+		<p>8. Use an eventhandler of your choice on this paragraph to make the paragraph background color yellow. </p>
+		<p>9. Use an onclick event to hide the picture shown below.</p>
+		<p>10. Use the following button to make the picture shown below reappear.</p>
+		<p>
+		  <input type="submit" name="button4" id="button4" value="Submit" />
+		</p>
+		<p>11. Mouseover the following image to make its height and width double its original size. </p>
+		<p><img src="frog.jpg" width="100" height="100" /></p>
+		<p>12. Use a click event on the image to make it return to original size. </p>
+		<p>&nbsp;</p>
+		<script>
+			Element.$('heading').setExclusiveClassNames(['center','left', 'right','red','black'])
+		</script>
+	</body>
+</html>

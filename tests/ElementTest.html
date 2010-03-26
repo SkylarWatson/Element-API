@@ -40,10 +40,27 @@
 		assertFalse(Element.internalUse.extern(new Object()) instanceof HTMLDivElement)
 	}
 
-	function test_element_will_add_class() {
+	function test_addClassName_element_will_add_class() {
 		var element = Element.$('baz').internal
+		element.className = ""
 		Element.addClassName(element, 'blue')	
-		assertEquals(' blue', element.className)	
+		assertEquals('blue', element.className)	
+	}
+
+	function test_addClassName_orginal__has_no_classes__in_exclusive_list() {
+		var element = Element.$('baz').internal
+		element.className = ""
+		Element.$('baz').setExclusiveClassNames(['blue', 'red', 'green'])
+		Element.addClassName(element, 'blue')	
+		assertEquals('blue', element.className)	
+	}
+
+	function test_addClassName_orginal__has_different_classes__in_exclusive_list() {
+		var element = Element.$('baz').internal
+		element.className = "top skippy"
+		Element.$('baz').setExclusiveClassNames(['blue', 'red', 'green'])
+		Element.addClassName(element, 'blue')	
+		assertEquals('top skippy blue', element.className)	
 	}
 
 	function test_button_attribute_type() {
@@ -157,6 +174,40 @@
 		assertEquals('Test element name', 'pinky', element.name)
     }
 
+	/*
+	*	CSS Tests
+	*/
+	
+	function test_classExists_does_class_exist() {
+		var element = Element.create({type:'div', id:'boom', className:'red', parent:baz})		
+		assertTrue(Element.internalUse.classExists(element,'red'))
+	}
+	
+	function test_classExists_does_class_not_exist() {
+		var element = Element.create({type:'div', id:'boom', parent:baz})		
+		assertFalse(Element.internalUse.classExists(element,'red'))	
+	}
+	
+	function test_is_in_excluive_list() {
+		var roo = Element.create({type:'div', value:"I'm Roo", after:baz, className:"size"})
+		
+		Element.$(roo).setExclusiveClassNames(['red','blue'])	
+		Element.addClassName(roo, 'blue')
+		Element.addClassName(roo, 'red')
+		
+		assertTrue(Element.internalUse.isExclusive(roo,'red'))
+		assertTrue(Element.internalUse.isExclusive(roo,'blue'))		
+	}
+	
+	function test_is_exclusive_class_removed() {
+		var roo = Element.create({type:'div', value:"I'm Roo", after:baz, className:'skippy red blue top'})
+		element = Element.internalUse.extern(roo)
+		
+		Element.$(roo).setExclusiveClassNames(['red','blue'])			
+		Element.internalUse.removeExclusiveClassesFor('blue', element)
+		
+		assertEquals("skippy blue top", roo.internal.className)		
+	}
 
   </script>
 

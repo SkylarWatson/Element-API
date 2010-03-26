@@ -74,16 +74,13 @@ Element.$ = function(name) {
 
 Element.addClassName = function(element, className) {
 	element = Element.internalUse.extern(element)
-	var split = element.className.split(" ");
 
-	if(Element.internalUse.isExclusive(element,className)) {
-		Element.internalUse.removeExclusive(className, element.className, element)
+	if(!Element.internalUse.classExists(element,className)) {
+		Element.internalUse.removeExclusiveClassesFor(className,element)
+		var split = element.className.split(" ");
 		Element.internalUse.addClassName(split, className);
-		element.className = split.join(" ");
-	} else {
-		Element.internalUse.addClassName(split, className);
-		element.className = split.join(" ");
-	}	
+		element.className = Element.internalUse.trim(split.join(" "));
+	}
 }
 
 Element.removeClassName = function(element, className) {
@@ -106,13 +103,27 @@ Element.isString = function(value) {
 	return typeof value == "string" || value instanceof String;
 }
 
-Element.internalUse.removeExclusive = function(className, object, element) {
-	var split = object.split(" ")
+Element.internalUse.classExists = function(element, className) {
+	var split = Element.$(element).internal.className.split(" ")
 	for(var item in split) {
-		if(Element.internalUse.isExclusive(element,className)) {
-			Element.removeClassName(element, split[item])
+		if(split[item] == className) {
+			return true
 		}
-	}	
+	}
+		return false
+}
+
+Element.internalUse.removeExclusiveClassesFor = function(className, element) {
+	var split = element.className.split(" ")
+	if(Element.internalUse.isExclusive(element,className)) {
+		for(var item in split) {
+			if(Element.internalUse.isExclusive(element,split[item])) {
+				if(className != split[item]) {
+					Element.$(element).removeClassName(split[item])
+				}
+			}
+		}	
+	}
 }
 
 Element.internalUse.isExclusive = function(element, className) {	
@@ -183,10 +194,13 @@ Element.internalUse.addRowToTable = function(parent, options) {
 	return parent.insertRow(-1);
 }
 
-
 Element.internalUse.addCellToRow = function(parent, options) {
 	delete options.parent;
 	return parent.insertCell(-1);
+}
+
+Element.internalUse.trim = function(stringToTrim) {
+	return stringToTrim.replace(/^\s+|\s+$/g,"");
 }
 
 function ElementWrapper(element) {
