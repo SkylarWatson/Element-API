@@ -7,14 +7,12 @@
 		<div id="baz" class="size red"></div>	
 		
 		<script type="text/javascript">
-		
-			
+				
 			var baz = document.getElementById('baz')	
 			var baz = Element.$('baz')
-			
+					
 			var bar = Element.create({type:'input', id:'bar', name:'bar', value:'bar', parent:'baz' })
 			Element.create({type:'button', id:'bar', name:'foo', onclick: function() {bar.remove(); Element.removeClassName(baz, 'red'); Element.addClassName(baz, 'blue');}, value: 'var', parent:baz })
-//			Element.create({type:'button', id:'foo', name:'foo', onclick: function() {bar.remove(); baz.removeClassName('red'); baz.addClassName('blue');}, value: 'var', parent:baz })
 			
 			var voo = Element.create({value:'yo puppy', type:'input', after:'bar'})
 
@@ -32,18 +30,12 @@
 			Element.create({type:'div', value:"my div", parent:baz})
 			Element.create({type:'div', value:"my div 2", parent:'baz'})
 			
-//			var bar = Element.create({type:'span', parent:baz})
-//			Element.create({type:'div', value:"my div 3", parent:bar})
-			
-			
 			Element.create({type:'button', value:"Will display before the baz element", before:baz})
 			Element.create({type:'button', value:"Will display before the baz element (2)", before:'baz'})
 			
 			var bar = Element.$('baz')
 			Element.create({type:'button', value:"Will display before the baz element (3)", before:bar})
-			
-			
-			
+				
 			Element.create({type:'div', value:"Will display after the baz element", after:baz, className:"size"})
 			Element.create({type:'div', value:"Will display after the baz element", after:'baz', className:"size"})
 			
@@ -52,35 +44,18 @@
 			
 			
 			var roo = Element.create({type:'div', value:"I'm roo", after:bar, className:"size"})
-			
 			Element.$(roo).setExclusiveClassNames(['red','blue'])
-			
 			Element.addClassName(roo, 'blue')
 			Element.addClassName(roo,'red')
 			Element.addClassName(roo,'size')
 			Element.replaceClassName(roo, 'blue','red')
 			Element.addClassName(roo,'blue')
-			
 
-			
-			//roo.addClassName('blue')
-			//Element.removeClassName(roo, 'blue')
-			//roo.removeClassName('blue')
-			
-			Element.create({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })
-			
+			Element.create({type:'button', value:'click me', parent: baz, onclick: function() { alert('clicked'); } })		
 			
 			var di = Element.create({type:'div', value:'Skylar div1'})
-			var di2 = Element.create({type:'div', value:'Skylar div2'})
-			
+			var di2 = Element.create({type:'div', value:'Skylar div2'})			
 			Element.create({type:'span', value:'span', children:[di,di2], after:baz})
-									
-/*			Element.create({type:'div', id:'div1', value:'div1', parent:baz})
-			Element.create({type:'div', id:'div2', value:'div2', parent:baz})
-			Element.create({type:'div', id:'div3', value:'div3', parent:baz})
-			Element.create({type:'div', id:'div1.5', value:'div1.5', after:'div1'})
-			Element.create({type:'div', id:'div2.5', value:'div2.5', before:'div3'})
-			Element.create({type:'div', id:'div4', value:'div4', after:'div3'}) 	*/
 			
 		</script>
 		

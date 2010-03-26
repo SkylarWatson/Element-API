@@ -103,9 +103,9 @@ Element.isString = function(value) {
 }
 
 Element.internalUse.classExists = function(element, className) {
-	var split = Element.$(element).internal.className.split(" ")
-	for(var item in split) {
-		if(split[item] == className) {
+	var classNameArray = Element.$(element).internal.className.split(" ")
+	for(var index in classNameArray) {
+		if(classNameArray[index] == className) {
 			return true
 		}
 	}
@@ -113,12 +113,12 @@ Element.internalUse.classExists = function(element, className) {
 }
 
 Element.internalUse.removeExclusiveClassesFor = function(className, element) {
-	var split = element.className.split(" ")
+	var classNameArray = element.className.split(" ")
 	if(Element.internalUse.isExclusive(element,className)) {
-		for(var item in split) {
-			if(Element.internalUse.isExclusive(element,split[item])) {
-				if(className != split[item]) {
-					Element.$(element).removeClassName(split[item])
+		for(var index in classNameArray) {
+			if(Element.internalUse.isExclusive(element,classNameArray[index])) {
+				if(className != classNameArray[index]) {
+					Element.$(element).removeClassName(classNameArray[index])
 				}
 			}
 		}	
@@ -162,12 +162,6 @@ Element.internalUse.removeClassName = function(array, value) {
 		array.splice(index, 1);
 	}
 	return array;
-}
-
-Element.internalUse.setExclusiveClassNames = function() {
-	for(var x in array) {
-		
-	}
 }
 
 Element.internalUse.defaultProcessing = function(name, attribute, tag) {
