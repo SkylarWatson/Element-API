@@ -1,14 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>CIS240 CSS</title>
-		<script type="text/javascript" src="Element.js"></script>
-		
+		<script src="http://github.com/SkylarWatson/Element-API/raw/master/Element.js"></script>
 		<style type="text/css">
 				.red {color: #FF0000}
 				.black {color: #000;}
 				.center {text-align: center;}
 				.left {text-align: left;}
 				.right {text-align: right;}
+				.font {font-family:"Times New Roman", Times, serif; font-style:italic;}
+				.size {font-size:24px;}
+				.bg {background-color: #FFFF00;}
+				.frog {height: 100px; width: 100px;}
+				.frog_on_steroids {height: 200px; width: 200px;}
+				.hide {display: none;}
+				.show {display : inline;}
 		</style>
 	</head>
 	<body>
@@ -24,31 +32,31 @@
 		<p>4. Click the button to left align the H3 element. </p>
 		<p>
 		  <label>
-		  <input type="submit" onClick="Element.$('heading').addClassName('left')" value="Submit" />
+		  <input type="submit" onClick="Element.addClassName('heading','left')" value="Submit" />
 		  </label>
 		</p>
-		<p onMouseOver="Element.addClassName(this,'red')" onClick="Element.replaceClassName(this,'red','black')">
+		<p onMouseOver="Element.addClassName(this,'font')" onClick="Element.removeClassName(this,'font')">
 		   5. Part 1. Mouseover this paragraph to change the font to a font of you choice. 
 			  Part 2. Click on this paragraph to return the font to the default font.
 		</p>
-		<p>6. Click on the button to make the word SALE font size 24. </p>
+		<p>6. Click on the button to make the word <span id="sale">SALE</span> font size 24. </p>
 		<p>
 		  <label>
-		  <input type="submit" name="button2" id="button2" value="Submit" />
+		  <input type="submit" onClick="Element.addClassName('sale','size')" value="bigger" />
 		  </label>
 		  <label>
-		  <input type="submit" name="button3" id="button3" value="Submit" />
+		  <input type="submit" onClick="Element.removeClassName('sale','size')" value="smaller" />
 		  </label>
 		</p>
 		<p>7. Click on the second button above to return the word to its original size.</p>
-		<p>8. Use an eventhandler of your choice on this paragraph to make the paragraph background color yellow. </p>
-		<p>9. Use an onclick event to hide the picture shown below.</p>
+		<p onMouseOver="Element.addClassName(this,'bg')">8. Use an eventhandler of your choice on this paragraph to make the paragraph background color yellow. </p>
+		<p onClick="Element.$('frog').addClassName('hide')">9. Use an onclick event to hide the picture shown below.</p>
 		<p>10. Use the following button to make the picture shown below reappear.</p>
 		<p>
-		  <input type="submit" name="button4" id="button4" value="Submit" />
+		  <input type="submit" onClick="Element.$('frog').addClassName('show')" value="Submit" />
 		</p>
 		<p>11. Mouseover the following image to make its height and width double its original size. </p>
-		<p><img src="frog.jpg" width="100" height="100" /></p>
+		<p><img src="frog.jpg" id="frog" class="frog" onMouseOver="Element.addClassName(this,'frog_on_steroids')" onClick="Element.removeClassName(this,'frog_on_steroids')"/></p>
 		<p>12. Use a click event on the image to make it return to original size. </p>
 		<p>&nbsp;</p>
 		<script>

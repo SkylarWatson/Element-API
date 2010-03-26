@@ -63,7 +63,6 @@ Element.attributes.value = function(type, attribute, tag) {
 
 Element.$ = function(name) {
 	if(name instanceof ElementWrapper) return name;
-	
 	if(Element.isString(name)) {
 		var element = document.getElementById(name)
 		return element == null ? null : new ElementWrapper(element)		
