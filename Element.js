@@ -73,7 +73,7 @@ Element.$ = function(name) {
 
 Element.addClassName = function(element, className) {
 	element = Element.internalUse.extern(element)
-
+	
 	if(!Element.internalUse.classExists(element,className)) {
 		Element.internalUse.removeExclusiveClassesFor(className,element)
 		var split = element.className.split(" ");
@@ -149,11 +149,15 @@ Element.internalUse.extern = function(value) {
 }
 
 Element.internalUse.addClassName = function (array, value) {
-	var index = array.indexOf(array, value);
-	if(index == -1) {
-		array.push(value);
+	if('' == array) {
+		array.push(value)
+	} else {
+		var index = array.indexOf(array, value);
+		if(index == -1) {
+			array.push(value)
+		}
+		return array;
 	}
-	return array;
 }
 
 Element.internalUse.removeClassName = function(array, value) {
@@ -194,6 +198,25 @@ Element.internalUse.addCellToRow = function(parent, options) {
 
 Element.internalUse.trim = function(stringToTrim) {
 	return stringToTrim.replace(/^\s+|\s+$/g,"");
+}
+
+Array.prototype.indexOf = function(elt /*, from*/) {
+	var len = this.length;
+    var from = Number(arguments[1]) || 0;
+    
+    from = (from < 0)
+         ? Math.ceil(from)
+         : Math.floor(from);
+    if (from < 0)
+      from += len;
+
+    for (; from < len; from++)
+    {
+      if (from in this &&
+          this[from] === elt)
+        return from;
+    }
+    return -1;
 }
 
 function ElementWrapper(element) {
